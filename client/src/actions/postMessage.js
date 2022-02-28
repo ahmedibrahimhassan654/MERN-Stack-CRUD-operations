@@ -8,17 +8,31 @@ export const ACTION_TYPES = {
 };
 
 export const fetchAll = () => (dispatch) => {
-  api
-    .postMessage()
-    .fetchAll()
-    .then((res) => {
-      console.log(res);
-      dispatch({
-        type: ACTION_TYPES.FETCH_ALL,
-        payload: res.data,
+  try {
+    api
+      .postMessage()
+      .fetchAll()
+      .then((res) => {
+        console.log("FETCH_ALL Action", res);
+        dispatch({
+          type: ACTION_TYPES.FETCH_ALL,
+          payload: res.data,
+        });
       });
-    })
-    .catch((err) => console.log(err));
+  } catch (err) {
+    console.log(err);
+  }
+  // api
+  //   .postMessage()
+  //   .fetchAll()
+  //   .then((res) => {
+  //     console.log("FETCH_ALL Action", res);
+  //     dispatch({
+  //       type: ACTION_TYPES.FETCH_ALL,
+  //       payload: res.data,
+  //     });
+  //   })
+  //   .catch((err) => console.log(err));
 };
 
 export const create = (data, onSuccess) => (dispatch) => {
